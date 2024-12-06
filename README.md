@@ -14,6 +14,11 @@ Use an iCal (RFC2445) RECUR clause in the first line of an issue's description t
 At present, this script only parses a subset of iCal RECUR types (specifically, INTERVAL/BYDAY).
 You can add more by editing the subroutine calculate_next_event().
 
+You'll need to create a file to hold the API key.  By default, the script looks for this in ./secrets/api-key but this can be changed with the -k option.
+
+The script won't update the status of any issues by default (it just changes the due date).  If you want to specify a new status, use the -s option.  The status name must be the same across all projects.
+Also, it will scan all projects in your workspace - you can't (yet) specify a single project or set of projects.
+
 I run this script with a cron job, once a week, to update my recurring tasks.  Use something like this in your crontab:
 ```
 0 12    * * *   root    /path/to/plane-issues-updater.pl -u http://my.plane.so/api/v1/workspaces/my_workspace
